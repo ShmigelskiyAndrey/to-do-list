@@ -1,13 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
+import {v4 as uuidv4} from 'uuid';
 import Inputblock from './Inputblock'
-import Todolist from './Todolist'
+import Todotask from './Todotask'
+uuidv4();
 
 export default function Container() {
+  
+  const [todos, setTodos] = useState([])
+
+  const addTodo = todo => {
+    setTodos([...todos, {task: todo, id: uuidv4()}]);
+  }
+
   return (
     <div className="container">
         <p className='title'>To Do List</p>
-        <Inputblock></Inputblock>
-        <Todolist></Todolist>
+        <Inputblock addTodo={addTodo}></Inputblock>
+        {todos.map((todo, index) => (
+          <Todotask task={todo} key={index}/>
+        ))}
+        
     </div>
   )
 }
