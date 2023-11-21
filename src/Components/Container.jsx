@@ -9,7 +9,13 @@ export default function Container() {
   const [todos, setTodos] = useState([])
 
   const addTodo = todo => {
-    setTodos([...todos, {task: todo, id: uuidv4()}]);
+    setTodos([...todos, {task: todo, index: uuidv4()}]);
+  }
+
+  const removeTodo = index => {
+    setTodos(todos.filter(todo => {
+      return todo.index !== index
+    }))
   }
 
   return (
@@ -17,7 +23,7 @@ export default function Container() {
         <p className='title'>To Do List</p>
         <Inputblock addTodo={addTodo}></Inputblock>
         {todos.map((todo, index) => (
-          <Todotask task={todo} key={index}/>
+          <Todotask task={todo} key={index} removeTodo={removeTodo}/>
         ))}
         
     </div>
