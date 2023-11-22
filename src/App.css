@@ -36,6 +36,10 @@
   width: 100%;
 }
 
+.edit {
+  margin-top: 20px;
+}
+
 .inputblock input{
   box-sizing: border-box;
   width: 80%;
@@ -85,4 +89,9 @@
   color: #9AFEEC;
   width: 100%;
   height: 100%;
+}
+
+.completed {
+  color: #818181;
+  text-decoration: line-through;
 }
