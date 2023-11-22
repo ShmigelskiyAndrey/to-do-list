@@ -25,7 +25,6 @@ export default function Container() {
 
   const editTodo = index => {
     setTodos(todos.map(todo => todo.index === index ? {...todo, isEditing: !todo.isEditing} : todo ))
-    console.log(todos)
   }
 
   return (

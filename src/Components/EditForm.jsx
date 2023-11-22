@@ -3,7 +3,11 @@ import React , { useState } from 'react'
 
 export default function Todotask({task, editTodo}) {
 
-    const [taskVaue, setTaskValue] = useState("")
+    const [taskValue, setTaskValue] = useState("")
+
+    const handleSubmit = e => {
+        e.preventDefault();
+    }
 
   return (
     <div className="wrapper">
@@ -11,8 +15,12 @@ export default function Todotask({task, editTodo}) {
             <p>{task.task}</p>
         </div>
         <div className={`inputblock edit`}>
-            <input type="text" placeholder='editing...' value={taskVaue} onChange={e => setTaskValue(e.target.value)}></input>
-            <button onClick={() => {task.task = taskVaue; editTodo(task.index)}}>edit</button>  
+            <form onSubmit={handleSubmit}>
+                <input type="text" placeholder='editing...' value={taskValue} onChange={e => setTaskValue(e.target.value)}></input>
+                {taskValue ? 
+                <button type='submit' onClick={() => {task.task = taskValue; editTodo(task.index)}}>Edit Task</button> : 
+                <button onClick={() => {editTodo(task.index)}}>Edit Task</button>} 
+            </form>
         </div>
     </div>
   )
