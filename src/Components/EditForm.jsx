@@ -18,8 +18,8 @@ export default function Todotask({task, editTodo}) {
             <form onSubmit={handleSubmit}>
                 <input type="text" placeholder='editing...' value={taskValue} onChange={e => setTaskValue(e.target.value)}></input>
                 {taskValue ? 
-                <button type='submit' onClick={() => {task.task = taskValue; editTodo(task.index)}}>Edit Task</button> : 
-                <button onClick={() => {editTodo(task.index)}}>Edit Task</button>} 
+                <button type='submit' onClick={() => {task.task = taskValue; editTodo(task.id)}}>Edit Task</button> : 
+                <button onClick={() => {editTodo(task.id)}}>Edit Task</button>} 
             </form>
         </div>
     </div>
