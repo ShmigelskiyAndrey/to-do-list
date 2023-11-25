@@ -72,6 +72,19 @@
   padding: 0 0 0 20px;
 }
 
+.leftSide {
+  display: flex;
+  flex-direction: row ;
+  align-items: center ;
+  max-height: 50px;
+  
+}
+
+.text {
+  padding-left: 20px;
+  cursor: pointer;
+}
+
 .buttons {
   max-width: 160px;
 }
@@ -94,4 +107,16 @@
 .completed {
   color: #818181;
   text-decoration: line-through;
+}
+
+.completeCircle {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #9AFEEC;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.done {
+  background-color: #9AFEEC;
 }

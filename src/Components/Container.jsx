@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Inputblock from './Inputblock'
 import Todotask from './Todotask'
 import EditForm from './EditForm'
-const baseUrl = 'https://crudcrud.com/api/ccb24084f7454c38b1a2cba542f7cbd0/tasks'
+const baseUrl = 'https://crudcrud.com/api/f65a77c765454ad699ed1c10bc938f7c/tasks'
 
 export default function Container() {
   
@@ -19,6 +19,8 @@ export default function Container() {
       console.log(tasks)
     })
   }
+
+  
 
   const addTodo = todo => {
     const newTodo = {task: todo, completed: false, isEditing: false};
@@ -72,8 +74,26 @@ export default function Container() {
     })
   }
 
-  const editTodo = id => {
-    setTodos(todos.map(todo => todo.id === id ? {...todo, isEditing: !todo.isEditing} : todo ))
+  const editTodo = (id) => {
+    const {task, isEditing} = todos.find(task => task.id === id)
+    const updatedTask = {
+      task,
+      isEditing: !isEditing
+    }
+
+    fetch(`${baseUrl}/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-type': 'application/json;utc-8'
+      },
+      body: JSON.stringify(updatedTask)
+    }).then(response => {
+      if(response.ok) {
+        fetchTodos()
+      } else {
+        throw new Error("Failed to create task")
+      }
+    })
   }
 
   return (

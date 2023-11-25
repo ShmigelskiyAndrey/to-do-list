@@ -5,7 +5,10 @@ import { FaEdit } from "react-icons/fa";
 export default function Todotask({task, removeTodo, toggleComplete, editTodo}) {
   return (
     <div className='todotask' >
-        <p onClick={() => toggleComplete(task.id)} className={`${task.completed ? "completed" : ""}`}>{task.task}</p>
+        <div className='leftSide'>
+        <div className={`completeCircle ${task.completed ? 'done' : ""}`} onClick={() => toggleComplete(task.id)}></div>
+        <p onClick={() => toggleComplete(task.id)} className={`text ${task.completed ? "completed" : ""}`}>{task.task}</p>
+        </div>
         <div className="buttons">
           <button onClick={() => editTodo(task.id)}><FaEdit className='icon'/></button>
           <button onClick={() => removeTodo(task.id)}><RiDeleteBin4Fill className='icon'/></button>
