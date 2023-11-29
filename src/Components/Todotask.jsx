@@ -10,7 +10,7 @@ export default function Todotask({task, removeTodo, toggleComplete, editTodo}) {
         <p onClick={() => toggleComplete(task.id)} className={`text ${task.completed ? "completed" : ""}`}>{task.task}</p>
         </div>
         <div className="buttons">
-          <button onClick={() => editTodo(task.id)}><FaEdit className='icon'/></button>
+          <button onClick={() => editTodo(task)}><FaEdit className='icon'/></button>
           <button onClick={() => removeTodo(task.id)}><RiDeleteBin4Fill className='icon'/></button>
         </div>
     </div>

@@ -1,13 +1,17 @@
-import React , { useState } from 'react'
+import React , { useState, useCallback } from 'react'
 
 
-export default function Todotask({task, editTodo}) {
+export default function EditForm({task, editTodo}) {
 
     const [taskValue, setTaskValue] = useState("")
 
     const handleSubmit = e => {
         e.preventDefault();
     }
+
+    const handleChange = useCallback((e) => {
+        setTaskValue(e.target.value)
+    }, [])
 
   return (
     <div className="wrapper">
@@ -16,10 +20,10 @@ export default function Todotask({task, editTodo}) {
         </div>
         <div className={`inputblock edit`}>
             <form onSubmit={handleSubmit}>
-                <input type="text" placeholder='editing...' value={taskValue} onChange={e => setTaskValue(e.target.value)}></input>
+                <input type="text" placeholder='editing...' value={taskValue} onChange={handleChange}></input>
                 {taskValue ? 
-                <button type='submit' onClick={() => {task.task = taskValue; editTodo(task.id)}}>Edit Task</button> : 
-                <button onClick={() => {editTodo(task.id)}}>Edit Task</button>} 
+                <button type='submit' onClick={() => {editTodo({...task, task: taskValue})}}>Edit Task</button> : 
+                <button onClick={() => {editTodo(task)}}>Edit Task</button>} 
             </form>
         </div>
     </div>
