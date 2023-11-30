@@ -1,5 +1,5 @@
 const baseUrl =
-  "https://crudcrud.com/api/cbc5f41e9d2c4ea5a8eadd86573f3ed7/tasks";
+  "https://crudcrud.com/api/ca615cf312ef4cd284586cac17e376e5/tasks";
 
 export const createTask = (taskData) =>
   fetch(baseUrl, {
@@ -14,30 +14,28 @@ export const createTask = (taskData) =>
     }
   });
 
-export const fetchTaskList = () => {
-  return fetch(baseUrl)
+export const fetchTaskList = () =>
+  fetch(baseUrl)
     .then((res) => {
       if (res.ok) {
         return res.json();
       }
     })
-    .then((taskList) => {
-      return taskList.map(({ _id, ...task }) => ({ id: _id, ...task }));
-    });
-};
+    .then((taskList) =>
+      taskList.map(({ _id, ...task }) => ({ id: _id, ...task }))
+    );
 
-export const removeTask = (id) => {
-  return fetch(`${baseUrl}/${id}`, {
+export const removeTask = (id) =>
+  fetch(`${baseUrl}/${id}`, {
     method: "DELETE",
   }).then((response) => {
     if (!response.ok) {
       throw new Error("Failed to delete task");
     }
   });
-};
 
-export const editTask = (id, updatedTask) => {
-  return fetch(`${baseUrl}/${id}`, {
+export const editTask = (id, updatedTask) =>
+  fetch(`${baseUrl}/${id}`, {
     method: "PUT",
     headers: {
       "Content-type": "application/json;utc-8",
@@ -48,4 +46,3 @@ export const editTask = (id, updatedTask) => {
       throw new Error("Failed to edit task");
     }
   });
-};

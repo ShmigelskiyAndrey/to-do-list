@@ -13,20 +13,17 @@ export default function Container() {
   },[])
 
   const fetchTodos = () => {
-    fetchTaskList().then(taskList => setTodos(taskList))
+    fetchTaskList().then(taskList => setTodos(taskList)).catch(() => alert('something gone wrong, please try again')) 
   }
-
-
 
   const addTodo = todo => {
     const newTodo = {task: todo, completed: false, isEditing: false};
-
-    createTask(newTodo).then(() => fetchTodos()).catch(()=>{})
+    createTask(newTodo).then(() => fetchTodos()).catch(() => alert('something gone wrong, please try again')) 
   }
 
   const removeTodo = id => {
-    removeTask(id).then(() => fetchTodos())
-
+    removeTask(id).catch(() => alert('something gone wrong, please try again')) 
+    setTodos(todos.filter(task => task.id !== id))
   }
 
   const toggleComplete = id => {
@@ -36,7 +33,14 @@ export default function Container() {
       completed: !completed
     }
 
-    editTask(id, updatedTask).then(() => fetchTodos())
+    editTask(id, updatedTask).catch(() => alert('something gone wrong, please try again')) 
+    setTodos(todos.map(task => {
+      if (task.id === id) {
+        return {
+          ...task, completed: !completed
+        } 
+      } return task
+    }))
   }
 
   const editTodo = todoTask => {
@@ -46,7 +50,14 @@ export default function Container() {
       isEditing: !isEditing
     }
 
-    editTask(id, updatedTask).then(() => fetchTodos())
+    editTask(id, updatedTask).catch(() => alert('something gone wrong, please try again')) 
+    setTodos(todos.map(task => {
+      if (task.id === id) {
+        return {
+          ...task, task: todoTask.task, isEditing: !isEditing
+        } 
+      } return task
+    }))
   }
 
   return (

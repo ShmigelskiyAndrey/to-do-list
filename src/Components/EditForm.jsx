@@ -22,7 +22,7 @@ export default function EditForm({task, editTodo}) {
             <form onSubmit={handleSubmit}>
                 <input type="text" placeholder='editing...' value={taskValue} onChange={handleChange}></input>
                 {taskValue ? 
-                <button type='submit' onClick={() => {editTodo({...task, task: taskValue})}}>Edit Task</button> : 
+                <button type='submit' onClick={(e) => {e.preventDefault(); editTodo({...task, task: taskValue})}}>Edit Task</button> : 
                 <button onClick={() => {editTodo(task)}}>Edit Task</button>} 
             </form>
         </div>
